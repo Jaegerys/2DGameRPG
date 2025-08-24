@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -6,14 +7,21 @@ public class Enemy : Entity
 {
     private bool playerDetected;
     private float idleTimer;
-    private float idleFlipTime = 7f;
+    private float idleFlipTime = 5f;
+    private float pauseTime = 10f;
+    private float walkTime = 5f;
+
+    private void Start()
+    {
+        StartCoroutine (HandleRest());
+    }
 
     protected override void Update()
     {
         HandleCollision();
         HandleMovement();
+        HandleRest();
         HandleAnimations();
-        HandleFlip();
         HandleDirection();
         HandleAttack();
     }
@@ -22,6 +30,23 @@ public class Enemy : Entity
     {
         if (playerDetected)
             anim.SetTrigger("attack");
+    }
+
+    private IEnumerator HandleRest()
+    {
+        while (true)
+        {
+            // Walk for set time
+            canMove = true;
+            yield return new WaitForSeconds(walkTime);
+
+            // Stop for pauseTime
+            canMove = false;
+            yield return new WaitForSeconds(pauseTime);
+
+            HandleFlip();
+
+        }
     }
 
     protected override void HandleMovement()

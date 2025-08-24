@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float attackRadius;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected LayerMask whatIsTarget;
+    [SerializeField] public int damage = 5;
 
     [Header("Movement details")]
     [SerializeField] protected float moveSpeed = 3.5f;
@@ -49,6 +50,7 @@ public class Entity : MonoBehaviour
         HandleMovement();
         HandleAnimations();
         HandleFlip();
+        HandleAttack();
     }
 
     public void DamageTargets()
@@ -58,14 +60,14 @@ public class Entity : MonoBehaviour
         foreach (Collider2D enemy in enemyColliders)
         {
             Entity entityTarget = enemy.GetComponent<Entity>();
-            entityTarget.TakeDamage();
+            entityTarget.TakeDamage(damage);
 
         }
     }
 
-    protected virtual void TakeDamage()
+    protected virtual void TakeDamage(int damage)
     {
-        currentHealth -= 10;
+        currentHealth -= damage;
         DamageFeedback();
 
         if (currentHealth < 0)
