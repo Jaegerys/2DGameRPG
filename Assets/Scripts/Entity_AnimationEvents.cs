@@ -14,5 +14,4 @@ public class Entity_AnimationEvents : MonoBehaviour
     private void DisableMovementAndJump() => entity.EnableMovementAndJump(false);
     private void EnableMovementAndJump() => entity.EnableMovementAndJump(true);
 
-
 }
