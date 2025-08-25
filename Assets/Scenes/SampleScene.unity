@@ -519,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 832921585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.032, y: 0.5, z: 0}
+  m_LocalPosition: {x: -0.007, y: 0.432, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -769,12 +769,14 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  damage: 5
   moveSpeed: 8
   groundCheckDistance: 1.4
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 12
+  jumpForce: 14
+  charge: 0
 --- !u!1 &1105915922
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,8 +847,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.025692597, y: 0.105982006}
-  m_Radius: 0.52248085
+  m_Offset: {x: -0.02810955, y: 0.15489316}
+  m_Radius: 0.53715396
 --- !u!50 &1105915925
 Rigidbody2D:
   serializedVersion: 5
@@ -895,6 +897,7 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
+  damage: 5
   moveSpeed: 1
   groundCheckDistance: 0.4
   whatIsGround:
@@ -1443,6 +1446,7 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
+  damage: 5
   moveSpeed: 2
   groundCheckDistance: 1.1
   whatIsGround:

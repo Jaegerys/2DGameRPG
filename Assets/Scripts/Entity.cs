@@ -128,6 +128,7 @@ public class Entity : MonoBehaviour
     protected virtual void HandleCollision()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+
     }
 
     protected void HandleFlip()

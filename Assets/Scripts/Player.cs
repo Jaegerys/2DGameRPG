@@ -8,7 +8,7 @@ public class Player : Entity
     private float minChargeTime = 0.5f; // Minimum hold for a "charged" attack
     [SerializeField]private float charge;               // Current charge amount
     private bool isCharging;
-
+    private bool canDoubleJump;
 
     protected override void Update()
     {
@@ -26,7 +26,7 @@ public class Player : Entity
         xInput = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
-            TryToJump();
+            HandleJump();
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
             HandleAttack();
@@ -45,7 +45,7 @@ public class Player : Entity
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 anim.SetTrigger("attack1");
-                damage = 10;
+                damage = 15;
             }
                 
             if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -110,9 +110,30 @@ public class Player : Entity
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
 
+    private void HandleJump()
+    {
+        if (isGrounded)
+        {
+            canDoubleJump = true;
+        }
+
+        // Jump input
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isGrounded)
+            {
+                TryToJump();
+            }
+            else if (canDoubleJump)
+            {
+                TryToJump();
+                canDoubleJump = false; // Use up double jump
+            }
+        }
+    }
+
     private void TryToJump()
     {
-        if (isGrounded && canJump)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
     }
 
