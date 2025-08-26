@@ -63,25 +63,21 @@ public class Player : Entity
         {
             isCharging = true;
             charge = 0f;
-            Debug.Log("Started charging...");
         }
 
-        // While holding the button, increase charge
         if (isCharging && Input.GetKey(KeyCode.R))
         {
             charge += Time.deltaTime;
             charge = Mathf.Clamp(charge, 0f, maxChargeTime);
-            Debug.Log("Charging: " + charge);
+            Debug.Log("Charging..." + charge);
         }
 
-        // Release button -> perform charge attack
         if (isCharging && Input.GetKeyUp(KeyCode.R))
         {
             isCharging = false;
             HandleChargeAttack();
         }
     }
-
 
     private void HandleChargeAttack()
     {
@@ -92,7 +88,6 @@ public class Player : Entity
 
             anim.SetTrigger("attack3");
 
-            // Example: apply damage scaling with charge
             damage = (int)Mathf.Lerp(10f, 50f, power);
             Debug.Log("Damage dealt: " + damage);
         }
